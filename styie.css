@@ -1,0 +1,178 @@
+/* style.css — лёгкий, воздушный и адаптивный */
+
+/* Подключаем красивый шрифт (системный, чтобы не грузить лишнее) */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', Roboto, 'Helvetica Neue', system-ui, sans-serif;
+    background: linear-gradient(145deg, #fff9f7 0%, #fff0ea 100%);
+    /* Очень светлый персиковый градиент */
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    color: #3a2c2a; /* Мягкий тёмно-коричневый для текста */
+}
+
+.container {
+    max-width: 1200px;
+    width: 100%;
+    padding: 20px 16px;
+}
+
+/* Шапка */
+.header {
+    text-align: center;
+    margin-bottom: 40px;
+    padding: 10px 0;
+}
+
+.header h1 {
+    font-size: clamp(1.8rem, 6vw, 2.5rem); /* Адаптивный размер */
+    font-weight: 400;
+    color: #b45f4b; /* Приглушенный терракотовый */
+    margin-bottom: 10px;
+    letter-spacing: 1px;
+}
+
+.header p {
+    font-size: clamp(1rem, 4vw, 1.2rem);
+    color: #8c7a72;
+    border-bottom: 2px solid #fadcd2;
+    display: inline-block;
+    padding-bottom: 8px;
+}
+
+.heart-decoration {
+    font-size: 2rem;
+    margin-top: 16px;
+    animation: pulse 2s infinite ease-in-out;
+    opacity: 0.7;
+}
+
+@keyframes pulse {
+    0% { transform: scale(1); opacity: 0.7; }
+    50% { transform: scale(1.15); opacity: 1; }
+    100% { transform: scale(1); opacity: 0.7; }
+}
+
+/* Галерея — сетка */
+.gallery {
+    display: grid;
+    grid-template-columns: 1fr; /* На телефоне по умолчанию 1 колонка */
+    gap: 30px;
+    margin-bottom: 50px;
+}
+
+/* Планшеты и больше — уже 2 колонки */
+@media (min-width: 600px) {
+    .gallery {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 25px;
+    }
+}
+
+/* Компьютеры — 3 колонки (чтобы 10 фото красиво распределились: 3+3+4) */
+@media (min-width: 992px) {
+    .gallery {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+/* Карточка с фото */
+.photo-card {
+    background: rgba(255, 255, 255, 0.7);
+    backdrop-filter: blur(3px); /* Лёгкое размытие фона за карточкой */
+    border-radius: 32px;
+    padding: 16px 16px 20px 16px;
+    box-shadow: 0 15px 30px -12px rgba(180, 95, 75, 0.15),
+                0 0 0 1px rgba(255, 255, 255, 0.8) inset;
+    transition: all 0.3s ease;
+    display: flex;
+    flex-direction: column;
+}
+
+.photo-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 25px 35px -15px rgba(140, 95, 75, 0.25);
+}
+
+/* Контейнер для изображения — сохраняет пропорции */
+.image-container {
+    width: 100%;
+    aspect-ratio: 1 / 1; /* Квадратное фото, как в инстаграме, аккуратно */
+    border-radius: 24px;
+    overflow: hidden;
+    background-color: #fae6df; /* фон, пока грузится фото */
+    margin-bottom: 15px;
+    border: 2px solid white;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.03);
+}
+
+.image-container img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Фото заполнит контейнер без искажений, обрежется красиво */
+    display: block;
+    transition: transform 0.6s ease;
+}
+
+.photo-card:hover img {
+    transform: scale(1.03); /* Чуть приближается при наведении */
+}
+
+/* Подпись под фото */
+.photo-card figcaption {
+    font-size: 1rem;
+    line-height: 1.5;
+    color: #4d3b35;
+    background: rgba(255, 245, 240, 0.7);
+    padding: 12px 14px;
+    border-radius: 28px;
+    border: 1px dashed #ecc7bb;
+    text-align: center;
+    font-style: italic;
+    word-break: break-word;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.02);
+}
+
+/* Подвал */
+.footer {
+    text-align: center;
+    margin-top: 30px;
+    padding: 30px 10px 15px;
+    border-top: 2px solid #fad9cf;
+    color: #a48274;
+    font-size: 0.95rem;
+    letter-spacing: 0.3px;
+}
+
+/* Адаптивные мелкие правки для телефонов */
+@media (max-width: 480px) {
+    .container {
+        padding: 12px 12px;
+    }
+    
+    .photo-card {
+        padding: 12px 12px 16px 12px;
+        border-radius: 28px;
+    }
+    
+    .image-container {
+        border-radius: 20px;
+    }
+    
+    .photo-card figcaption {
+        font-size: 0.9rem;
+        padding: 10px 10px;
+    }
+    
+    .header h1 {
+        font-size: 1.9rem;
+    }
+}
+
